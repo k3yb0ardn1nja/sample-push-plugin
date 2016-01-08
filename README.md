@@ -27,7 +27,7 @@ This sample shows an integration between the [NativeScript Push Notifications pl
 	-	 Android: Set your Google project number
  
 			projectNumber: '<ENTER_YOUR_PROJECT_NUMBER>'
-	- (Optional) If your Telerik Platform subscription does not support calls over HTTPS, set the `scheme` of the `Everlive` constructor to `http`. See the [link](#iOS-App-Transport-Security) below for more information.  
+	- (Optional) If your Telerik Platform subscription does not support calls over HTTPS, set the `scheme` of the `Everlive` constructor to `http`. See the [link](#iOS-App-Transport-Security) below for more information about iOS.  
 	
 ## Android
 
@@ -55,9 +55,13 @@ This sample shows an integration between the [NativeScript Push Notifications pl
 
 ### iOS App Transport Security 
 
-With the launch of iOS 9 iOS apps by default require that HTTP requests use a secure connection. The sample app is configured to use SSL encryption when calling the Telerik Platform API to manage the device registration. 
+#### Using Connection Encryption 
 
-However, if your Telerik Platform subscription does not allow for encrypted connection and for testing purposes, you may need to register an exception for the Telerik Platform notifications API URL (*api.everlive.com*). To do this add to the `*MyApp*-info.plist` information property list file of the generated Xcode project the following keys and values:
+With the launch of iOS 9 iOS apps by default require that HTTP requests use a secure connection. The sample app is configured to use SSL encryption when communicating with the Telerik Platform API to manage the device registration. 
+
+### Using Insecure Connection
+
+If your Telerik Platform subscription does not allow for encrypted connection and for testing purposes, you may need to register an exception for the Telerik Platform notifications API URL (*api.everlive.com*). To do this add to the `<myapp>-info.plist` information property list file of the generated Xcode project the following keys and values:
 
 ```
 <key>NSAppTransportSecurity</key>
