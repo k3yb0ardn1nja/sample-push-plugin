@@ -57,7 +57,7 @@ This sample shows an integration between the [NativeScript Push Notifications pl
 
 With the launch of iOS 9 iOS apps by default require that HTTP requests use a secure connection. The sample app is configured to use SSL encryption when calling the Telerik Platform API to manage the device registration. 
 
-However, if your Telerik Platform subscription does not allow for encrypted connection, you have to register an an exception for the Telerik Platform notifications API (*api.everlive.com*). To do this add to the `*MyApp*-info.plist` information property list file of the generated Xcode project the following keys and values:
+However, if your Telerik Platform subscription does not allow for encrypted connection and for testing purposes, you may need to register an exception for the Telerik Platform notifications API URL (*api.everlive.com*). To do this add to the `*MyApp*-info.plist` information property list file of the generated Xcode project the following keys and values:
 
 ```
 <key>NSAppTransportSecurity</key>
@@ -66,7 +66,6 @@ However, if your Telerik Platform subscription does not allow for encrypted conn
   <dict>
     <key>api.everlive.com</key>
     <dict>
-       <!--Include to allow HTTP requests-->
       <key>NSTemporaryExceptionAllowsInsecureHTTPLoads</key>
       <true/>
   </dict>
