@@ -4,13 +4,13 @@
 
 # Description
 
-This sample shows an integration between the [NativeScript Push Notifications plugin](https://github.com/NativeScript/push-plugin) with [Telerik Backend Services](http://www.telerik.com/backend-services). 
+This sample shows an integration between the [NativeScript Push Notifications plugin](https://github.com/NativeScript/push-plugin) with [Telerik Platform](http://www.telerik.com/platform). 
 
 # Requirements
 
    * Registration in [Telerik Platform](https://platform.telerik.com)
-   * A new or existing Backend Services project in your Platform account.
-   * The project must be configured for push notifications as specified in the Backend Services [documentation](http://docs.telerik.com/platform/backend-services/features/push-notifications/setup).
+   * A new or existing app in your Platform account.
+   * The project must be configured for push notifications as specified in the [documentation](http://docs.telerik.com/platform/backend-services/features/push-notifications/setup).
 
 > In order to send a notification to a subset of users you will need a Telerik Platform [subscription plan](http://www.telerik.com/purchase/platform) that supports "Push to Segment".
 
@@ -20,13 +20,14 @@ This sample shows an integration between the [NativeScript Push Notifications pl
 
 		tns install 	
 
-- Go to main-view-model and set the correct settings:
-	-	 Set your Everlive API Key at:
+- Go to `main-view-model.js` and set the correct settings:
+	-	 Set your Telerik Platform App Id to the *apiKey* key at:
 
-			self.everlive = new Everlive('<ENTER_YOUR_API_KEY_HERE>');
-	-	 Android: Set your project number
+			self.everlive = new Everlive(options);
+	-	 Android: Set your Google project number
  
 			projectNumber: '<ENTER_YOUR_PROJECT_NUMBER>'
+	- (Optional) If your Telerik Platform subscription does not support calls over HTTPS, set the `scheme` of the `Everlive` constructor to `http`. See the [link](#iOS-App-Transport-Security) below for more information.  
 	
 ## Android
 
@@ -34,7 +35,7 @@ This sample shows an integration between the [NativeScript Push Notifications pl
 
 		tns run android
 
-- Click Register to register the device in Backend Services and you can start sending push notifications from your account.
+- Click Register to register the device in Telerik Platform and you can start sending push notifications from your account.
 
 ## iOS
 
@@ -47,8 +48,28 @@ This sample shows an integration between the [NativeScript Push Notifications pl
 	}
 ````
 
-- Run the applications
+- Run the application
 
 		tns run ios
-
 	  
+
+### iOS App Transport Security 
+
+With the launch of iOS 9 iOS apps by default require that HTTP requests use a secure connection. The sample app is configured to use SSL encryption when calling the Telerik Platform API to manage the device registration. 
+
+However, if your Telerik Platform subscription does not allow for encrypted connection, you have to register an an exception for the Telerik Platform notifications API (*api.everlive.com*). To do this add to the `*MyApp*-info.plist` information property list file of the generated Xcode project the following keys and values:
+
+```
+<key>NSAppTransportSecurity</key>
+<dict>
+  <key>NSExceptionDomains</key>
+  <dict>
+    <key>api.everlive.com</key>
+    <dict>
+       <!--Include to allow HTTP requests-->
+      <key>NSTemporaryExceptionAllowsInsecureHTTPLoads</key>
+      <true/>
+  </dict>
+  </dict>
+</dict>
+```
