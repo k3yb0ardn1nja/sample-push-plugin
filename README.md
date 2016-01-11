@@ -1,3 +1,5 @@
+# Telerik Push Plugin Sample App for NativeScript
+
 - [Description](#description)
 - [Requirements](#requirements)
 - [Getting started](#getting-started)
