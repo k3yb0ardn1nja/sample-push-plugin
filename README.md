@@ -1,69 +1,90 @@
-# Telerik Push Plugin Sample App for NativeScript
+# Telerik Push Notifications Plugin for NativeScript Sample App
 
-- [Description](#description)
+<a id="top"></a>
+- [Overview](#overview)
 - [Requirements](#requirements)
-- [Getting started](#getting-started)
+- [Configuration](#configuration)
+- [Running the Sample](#running-the-sample)
 
-# Description
+# Overview
 
-This sample shows an integration between the [NativeScript Push Notifications plugin](https://github.com/NativeScript/push-plugin) with [Telerik Platform](http://www.telerik.com/platform). 
+You need to enable the [Telerik Push Plugin for NativeScript](https://github.com/NativeScript/push-plugin) when building NativeScript apps in [Telerik Platform](http://www.telerik.com/platform) if you want them to support push notifications.
+
+This sample app shows how to build an app using the plugin.
 
 # Requirements
 
-   * Registration in [Telerik Platform](https://platform.telerik.com)
-   * A new or existing app in your Platform account.
-   * The project must be configured for push notifications as specified in the [documentation](http://docs.telerik.com/platform/backend-services/features/push-notifications/setup).
+   * **An active [Telerik Platform](https://platform.telerik.com) account** Ensure that you can log in to a Telerik Platform account. This can be a free trial account. To send a notification to a subset of users you will need a [subscription plan](http://www.telerik.com/purchase/platform) that supports "Push to Segment".
+   * **A new or existing Telerik Platform app in your account.**
 
-> In order to send a notification to a subset of users you will need a Telerik Platform [subscription plan](http://www.telerik.com/purchase/platform) that supports "Push to Segment".
+# Configuration
 
-# Running the sample
+You need to perform several settings before you can run the app. The configurations steps depend on the platform on which you will be running it.
 
-- Go to the /app folder and install dependencies
-
-		tns install 	
-
-- Go to `main-view-model.js` and set the correct settings:
-	-	 Set your Telerik Platform App Id to the *apiKey* key at:
-
-			self.everlive = new Everlive(options);
-	-	 Android: Set your Google project number
- 
-			projectNumber: '<ENTER_YOUR_PROJECT_NUMBER>'
-	- (Optional) If your Telerik Platform subscription does not support calls over HTTPS, set the `scheme` of the `Everlive` constructor to `http`. See the [link](#iOS-App-Transport-Security) below for more information about iOS.  
-	
 ## Android
 
-- Run the application
+Take these steps to run the app on Android:
 
-		tns run android
+1. Ensure that you have configured your app for push notifications as described in [Enabling Push Notifications](http://docs.telerik.com/platform/backend-services/javascript/push-notifications/push-enabling).
+2. Go to the sample app's `app` folder. 
+3. Install dependencies using this command:
 
-- Click Register to register the device in Telerik Platform and you can start sending push notifications from your account.
+	```
+	tns install
+	```
+
+4. Open `main-view-model.js` and set your account settings:
+	- Set your Telerik Platform App ID to the *apiKey* key:
+
+		```
+		self.everlive = new Everlive('<ENTER_YOUR_API_KEY_HERE>');
+		```
+
+	- Set your Google project number:
+
+		``` 
+		projectNumber: '<ENTER_YOUR_PROJECT_NUMBER>'
+		```
+	- (Optional) If your Telerik Platform subscription does not support calls over HTTPS, set the `scheme` of the `Everlive` constructor to `http`.
 
 ## iOS
 
-- Set the correct bundle ID in the package.json at the root level of the project. The ID should be the same as in your Certificate for Push Notifications.
+Take these steps to run the app on iOS:
 
-```javascript
-	"nativescript": {
-		"id": "com.telerik.PushNotificationApp",
-		...
-	}
-````
+1. Ensure that you have configured your app for push notifications as described in [Enabling Push Notifications](http://docs.telerik.com/platform/backend-services/javascript/push-notifications/push-enabling).
+2. Go to the sample app's `app` folder. 
+3. Install dependencies using this command:
 
-- Run the application
+	```
+	tns install
+	```
 
-		tns run ios
-	  
+4. Open `main-view-model.js` and set your Telerik Platform App ID to the *apiKey* key:
+
+		```
+		self.everlive = new Everlive('<ENTER_YOUR_API_KEY_HERE>');
+		```
+
+5. Set the correct bundle ID in `package.json` at the root level of the NativeScript project. The ID must match the the value Apple App ID value.
+
+	```javascript
+		"nativescript": {
+			"id": "com.telerik.PushNotificationApp",
+			...
+		}
+	```` 
+
 
 ### iOS App Transport Security 
 
-#### Using Connection Encryption 
+With the launch of iOS 9, the default setting for all iOS apps is to mandate a secure HTTP connection for outgoing requests. This sample app is configured to use SSL encryption when communicating with the Telerik Platform API to manage the device registration.
 
-With the launch of iOS 9 iOS apps by default require that HTTP requests use a secure connection. The sample app is configured to use SSL encryption when communicating with the Telerik Platform API to manage the device registration. 
+If your Telerik Platform subscription does not allow for encrypted connections or for testing purposes, you may need to register an exception for the Telerik Platform notifications API URL (*api.everlive.com*).
 
-#### Using Insecure Connection
+To do this:
 
-If your Telerik Platform subscription does not allow for encrypted connection and for testing purposes, you may need to register an exception for the Telerik Platform notifications API URL (*api.everlive.com*). To do this add to the `<myapp>-info.plist` information property list file of the generated Xcode project the following keys and values:
+1. Open `main-view-model.js` and set the `scheme` of the `Everlive` constructor to `http`.
+2. Add the following keys and values to the `<myapp>-info.plist` file containing the information property list of the generated Xcode project:
 
 ```
 <key>NSAppTransportSecurity</key>
@@ -78,3 +99,23 @@ If your Telerik Platform subscription does not allow for encrypted connection an
   </dict>
 </dict>
 ```
+
+# Running the Sample
+
+Take these steps to run the sample app:
+
+1. Execute the following NativeScript CLI command:
+	- On an iOS device:
+	
+		```
+		tns run android
+		```
+
+	- On an Android device:
+	
+		```
+		tns run ios
+		```
+
+2. On the device, click **Register** to register the device with Telerik Platform.
+3. Start sending push notifications from your Telerik Platform account.
