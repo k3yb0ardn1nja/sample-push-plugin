@@ -16,7 +16,10 @@ var MainViewModel = (function (_super) {
     function MainViewModel() {
         var self = this;
 
-        self.everlive = new Everlive('<ENTER_YOUR_API_KEY_HERE>');
+		self.everlive = new Everlive({
+					apiKey: '<ENTER_YOUR_API_KEY_HERE>',
+					scheme: 'https'
+				});
 
         var isDeviceRegistered = false;
         var disableButton = false;
