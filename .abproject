@@ -1,0 +1,28 @@
+{
+	"ProjectName": "sample-push-plugin",
+	"ProjectGuid": "{b67de8e9-4e36-479a-a904-5b8e1adc2e5a}",
+	"projectVersion": 1,
+	"AppIdentifier": "com.telerik.samplepushplugin",
+	"DisplayName": "sample-push-plugin",
+	"Author": "",
+	"Description": "sample-push-plugin",
+	"BundleVersion": "1.0",
+	"AndroidVersionCode": "1",
+	"iOSDeviceFamily": [
+		"1",
+		"2"
+	],
+	"iOSBackgroundMode": [],
+	"ProjectTypeGuids": "{F0A65104-D4F4-4012-B799-F612D75820F6}",
+	"AndroidPermissions": [
+		"android.permission.INTERNET"
+	],
+	"DeviceOrientations": [
+		"Portrait",
+		"Landscape"
+	],
+	"AndroidHardwareAcceleration": "false",
+	"iOSStatusBarStyle": "Default",
+	"FrameworkVersion": "1.5.2",
+	"Framework": "NativeScript"
+}
