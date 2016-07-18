@@ -1,36 +1,51 @@
-﻿.title {
-    font-size: 25;
-    horizontal-align: center;
-    color: #000000;
-    margin: 15;
+﻿.main-page {
+    background-color: #eee;
 }
 
-button {
-    font-size: 22;
-    horizontal-align: center;
-}
-
-.registrationMessage {
-    font-size: 15;
-    margin: 5;
-    color: #000000;
-    horizontal-align: center;
-}
-
-.registrationButton {
-    background-color: #3598db;
-    color: white;
-    text-decoration: none;
+.app-body-container {
+    color: #000;
     text-align: center;
-    letter-spacing: .5px;
+}
 
-    display: block;
-    margin: auto;
-    padding: 0;
+.main-page-heading {
+    text-align: left;
+    background-color: #2C3D4F;
+    padding: 20;
+}
 
+.main-page-heading .heading-title {
+    font-size: 34;
+    color: #fff;
+}
+
+.main-page-heading .heading-subtitle {
+    font-size: 20;
+    color: #d6d5d8;
+}
+
+.app-body-container .welcome-msg {
+    margin: 40 0 25 0;
+    font-family: OpenSans-Light;
+    font-size: 25;
+}
+
+.app-body-container .registration-msg {
+    font-family: OpenSans-Regular;
+    font-size: 22;
+}
+
+.app-body-container .loading-indicator {
+    margin: 10 0;
+}
+
+.app-body-container .registration-btn {
+    height: 70;
+    width: 270;
+    font-family: OpenSans-Semibold;
+    font-size: 20;
+    color: #fff;
+    background-color: #3497DA;
     overflow: hidden;
-
     border-width: 0;
     outline: none;
-    box-shadow: 0 1px 4px rgba(0, 0, 0, .6);
 }

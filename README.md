@@ -108,13 +108,13 @@ Take these steps to run the sample app:
 	- On an iOS device:
 	
 		```
-		tns run android
+		tns run ios
 		```
 
 	- On an Android device:
 	
 		```
-		tns run ios
+		tns run android
 		```
 
 2. On the device, click **Register** to register the device with Telerik Platform.

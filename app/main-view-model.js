@@ -5,11 +5,10 @@ var __extends = this.__extends || function (d, b) {
     d.prototype = new __();
 };
 var observable = require("data/observable");
-var application = require("application");
 var pushPlugin = require('nativescript-push-notifications');
 
 var dialogs = require("ui/dialogs");
-var Everlive = require('./everlive.js');
+var Everlive = require('./lib/everlive.js');
 
 var MainViewModel = (function (_super) {
     __extends(MainViewModel, _super);
@@ -17,12 +16,9 @@ var MainViewModel = (function (_super) {
         var self = this;
 
 		self.everlive = new Everlive({
-					apiKey: '<ENTER_YOUR_API_KEY_HERE>',
-					scheme: 'https'
-				});
-
-        var isDeviceRegistered = false;
-        var disableButton = false;
+			appId: '<ENTER_YOUR_API_KEY_HERE>',
+			scheme: 'https'
+		});
 
         _super.call(self);
 
@@ -39,7 +35,7 @@ var MainViewModel = (function (_super) {
         //});
 
         //Callback for device registration success
-        self._deviceRegistrationSuccess = function (success) {
+        self._deviceRegistrationSuccess = function () {
             self.set("isLoading",false);
             self.disableButton = false;
 
@@ -109,10 +105,10 @@ var MainViewModel = (function (_super) {
                 //Show a dialog with the push notification
                 //Remove undeeded quotes
                 var message = JSON.stringify(data);
-                if (message.charAt(0) === '"' && message.charAt(message.length -1) === '"')
-                {
+                if (message.charAt(0) === '"' && message.charAt(message.length -1) === '"') {
                     message = message.substr(1,message.length -2);
                 }
+                
                 dialogs.alert({
                     title: "Push Notification",
                     message: message,
@@ -124,7 +120,7 @@ var MainViewModel = (function (_super) {
         };
     }
 
-    MainViewModel.prototype.registerDevice = function (args) {
+    MainViewModel.prototype.registerDevice = function () {
         var self = this;
 
         //Adjust button and text message
@@ -135,9 +131,9 @@ var MainViewModel = (function (_super) {
 
         //Call the everlive register for push method
         self.everlive.push.register(self.pushSettings, self._deviceRegistrationSuccess, self._deviceRegistrationError);
-    }
+    };
 
-    MainViewModel.prototype.unregisterDevice = function (args) {
+    MainViewModel.prototype.unregisterDevice = function () {
         var self = this;
 
         self.set("buttonText", "Loading...");
@@ -147,21 +143,20 @@ var MainViewModel = (function (_super) {
         self.disableButton = true;
 
         self.everlive.push.unregister(self._unregisterDeviceSuccess, self._unregisterDeviceError);
-    }
+    };
 
-    MainViewModel.prototype.registrationTapAction = function (args) {
+    MainViewModel.prototype.registrationTapAction = function () {
         var self = this;
-        if(!self.isLoading) {
+        if (!self.isLoading) {
             if (self.isDeviceRegistered) {
                 self.unregisterDevice();
             } else {
                 self.registerDevice();
             }
         }
-    }
+    };
 
     return MainViewModel;
 })(observable.Observable);
 
-exports.MainViewModel = MainViewModel;
 exports.mainViewModel = new MainViewModel();

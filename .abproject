@@ -2,8 +2,8 @@
 	"ProjectName": "sample-push-plugin",
 	"ProjectGuid": "{b67de8e9-4e36-479a-a904-5b8e1adc2e5a}",
 	"projectVersion": 1,
-	"AppIdentifier": "com.telerik.samplepushplugin",
-	"DisplayName": "sample-push-plugin",
+	"AppIdentifier": "com.telerik.PushNotificationApp",
+	"DisplayName": "Push Plugin Sample",
 	"Author": "",
 	"Description": "sample-push-plugin",
 	"BundleVersion": "1.0",
@@ -18,11 +18,10 @@
 		"android.permission.INTERNET"
 	],
 	"DeviceOrientations": [
-		"Portrait",
-		"Landscape"
+		"Portrait"
 	],
 	"AndroidHardwareAcceleration": "false",
 	"iOSStatusBarStyle": "Default",
-	"FrameworkVersion": "1.5.2",
+	"FrameworkVersion": "2.0.0",
 	"Framework": "NativeScript"
 }

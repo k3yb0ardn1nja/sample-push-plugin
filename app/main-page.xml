@@ -1,12 +1,17 @@
-<Page xmlns="http://www.nativescript.org/tns.xsd" loaded="pageLoaded" actionBarHidden="true">
-    <StackLayout>
-        <Label text="{{headerText}}" cssClass="title" textWrap="true"/>
+<Page xmlns="http://www.nativescript.org/tns.xsd" loaded="pageLoaded" cssClass="main-page" actionBarHidden="true">
+    <StackLayout cssClass="app-body-container">
+		<StackLayout cssClass="main-page-heading">
+			<Label text="Push Notifications" cssClass="heading-title" />
+			<Label text="by Telerik Backend Services" cssClass="heading-subtitle" />
+		</StackLayout>
 
-        <Label text="{{ registrationMessage }}" cssClass="registrationMessage" textWrap="true"/>
-        <ActivityIndicator col="2" busy="{{ isLoading }}" horizontalAlignment="center"/>
+        <Label text="{{headerText}}" cssClass="welcome-msg" textWrap="true"/>
 
-        <Button text="{{ buttonText }}" tap="{{ registrationTapAction }}" cssClass="registrationButton"/>
+        <Label text="{{ registrationMessage }}" cssClass="registration-msg" textWrap="true"/>
+        <ActivityIndicator col="2" busy="{{ isLoading }}" horizontalAlignment="center" cssClass="loading-indicator" />
 
-        <Label text="{{ pushMessage }}" cssClass="pushMessage" textWrap="true"/>
+        <Button text="{{ buttonText }}" tap="{{ registrationTapAction }}" cssClass="registration-btn"/>
+
+        <Label text="{{ pushMessage }}" cssClass="push-msg" textWrap="true"/>
     </StackLayout>
 </Page>
