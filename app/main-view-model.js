@@ -5,10 +5,50 @@ var __extends = this.__extends || function (d, b) {
     d.prototype = new __();
 };
 var observable = require("data/observable");
+var application = require("application");
 var pushPlugin = require('nativescript-push-notifications');
 
 var dialogs = require("ui/dialogs");
 var Everlive = require('./lib/everlive.js');
+
+
+__showAlerts = true;
+__alertQueue = [];
+
+application.on(application.suspendEvent, function (args) {
+    __showAlerts = false;
+});
+
+application.on(application.resumeEvent, function (args) {
+    __alertQueue.forEach(function(notificationData) {
+        __displayAlert(notificationData);
+    });
+    __alertQueue = [];
+    __showAlerts = true;
+});
+
+function __displayAlert(notificationData) {
+    dialogs.alert({
+        title: notificationData.title,
+        message: notificationData.message,
+        okButtonText: "OK"
+    }).then(function () {
+        console.log("Dialog closed!");
+    });
+}
+
+//Make sure we don't call alert before the app is fully resumed
+function showNotification(notificationData) {
+    if (__showAlerts) {
+        __displayAlert(notificationData);
+    } else {
+        __alertQueue.push(notificationData);
+    }
+}
+
+application.on(application.exitEvent, function (args) {
+
+});
 
 var MainViewModel = (function (_super) {
     __extends(MainViewModel, _super);
@@ -89,13 +129,10 @@ var MainViewModel = (function (_super) {
             },
             notificationCallbackIOS: function(userInfo) {
                 //Show a dialog with the push notification
-                dialogs.alert({
+                showNotification({
                     title: "Push Notification",
-                    message: JSON.stringify(userInfo.alert),
-                    okButtonText: "OK"
-                }).then(function () {
-                    console.log("Dialog closed!");
-                });            
+                    message: JSON.stringify(userInfo.alert)
+                });
             },
             //Android - specific settings
             android: {
@@ -108,13 +145,10 @@ var MainViewModel = (function (_super) {
                 if (message.charAt(0) === '"' && message.charAt(message.length -1) === '"') {
                     message = message.substr(1,message.length -2);
                 }
-                
-                dialogs.alert({
+
+                showNotification({
                     title: "Push Notification",
-                    message: message,
-                    okButtonText: "OK"
-                }).then(function () {
-                    console.log("Dialog closed!");
+                    message: message
                 });
             }
         };
