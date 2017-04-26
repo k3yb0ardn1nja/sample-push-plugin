@@ -4,11 +4,13 @@
 
 .app-body-container {
     color: #000;
+}
+
+.text-center {
     text-align: center;
 }
 
 .main-page-heading {
-    text-align: left;
     background-color: #2C3D4F;
     padding: 20;
 }

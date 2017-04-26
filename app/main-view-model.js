@@ -5,20 +5,20 @@ var __extends = this.__extends || function (d, b) {
     d.prototype = new __();
 };
 var observable = require("data/observable");
-var pushPlugin = require('nativescript-push-notifications');
+// var pushPlugin = require('nativescript-push-notifications');
 
 var dialogs = require("ui/dialogs");
-var Everlive = require('./lib/everlive.js');
+var Everlive = require('everlive-sdk');
 
 var MainViewModel = (function (_super) {
     __extends(MainViewModel, _super);
     function MainViewModel() {
         var self = this;
 
-		self.everlive = new Everlive({
-			appId: '<ENTER_YOUR_API_KEY_HERE>',
-			scheme: 'https'
-		});
+        self.everlive = new Everlive({
+            appId: '<ENTER_YOUR_API_KEY_HERE>',
+            scheme: 'https'
+        });
 
         _super.call(self);
 
@@ -36,7 +36,7 @@ var MainViewModel = (function (_super) {
 
         //Callback for device registration success
         self._deviceRegistrationSuccess = function () {
-            self.set("isLoading",false);
+            self.set("isLoading", false);
             self.disableButton = false;
 
             self.isDeviceRegistered = true;
@@ -47,7 +47,7 @@ var MainViewModel = (function (_super) {
         };
         //Callback for device registration error
         self._deviceRegistrationError = function (error) {
-            self.set("isLoading",false);
+            self.set("isLoading", false);
             self.disableButton = false;
 
             self.set("headerText", "Registration not successful!");
@@ -58,10 +58,10 @@ var MainViewModel = (function (_super) {
         };
 
         //Callback for device unregister success.
-        self._unregisterDeviceSuccess = function() {
+        self._unregisterDeviceSuccess = function () {
             self.isDeviceRegistered = false;
             self.disableButton = false;
-            self.set("isLoading",false);
+            self.set("isLoading", false);
 
             self.set("buttonText", "Enable Notifications");
             self.set("headerText", "Device unregistered successfully!");
@@ -69,10 +69,10 @@ var MainViewModel = (function (_super) {
         };
 
         //Callback for device unregister error.
-        self._unregisterDeviceError = function(error) {
+        self._unregisterDeviceError = function (error) {
             self.isDeviceRegistered = false;
             self.disableButton = false;
-            self.set("isLoading",false);
+            self.set("isLoading", false);
 
             self.set("buttonText", "Disable Notifications");
             self.set("headerText", "Could not unregister device!");
@@ -87,7 +87,7 @@ var MainViewModel = (function (_super) {
                 sound: true,
                 alert: true
             },
-            notificationCallbackIOS: function(userInfo) {
+            notificationCallbackIOS: function (userInfo) {
                 //Show a dialog with the push notification
                 dialogs.alert({
                     title: "Push Notification",
@@ -95,7 +95,7 @@ var MainViewModel = (function (_super) {
                     okButtonText: "OK"
                 }).then(function () {
                     console.log("Dialog closed!");
-                });            
+                });
             },
             //Android - specific settings
             android: {
@@ -105,10 +105,10 @@ var MainViewModel = (function (_super) {
                 //Show a dialog with the push notification
                 //Remove undeeded quotes
                 var message = JSON.stringify(data);
-                if (message.charAt(0) === '"' && message.charAt(message.length -1) === '"') {
-                    message = message.substr(1,message.length -2);
+                if (message.charAt(0) === '"' && message.charAt(message.length - 1) === '"') {
+                    message = message.substr(1, message.length - 2);
                 }
-                
+
                 dialogs.alert({
                     title: "Push Notification",
                     message: message,
@@ -126,7 +126,7 @@ var MainViewModel = (function (_super) {
         //Adjust button and text message
         self.set("buttonText", "Loading...");
         self.set("registrationMessage", "Registering device...");
-        self.set("isLoading",true);
+        self.set("isLoading", true);
         self.disableButton = true;
 
         //Call the everlive register for push method
@@ -139,7 +139,7 @@ var MainViewModel = (function (_super) {
         self.set("buttonText", "Loading...");
         self.set("registrationMessage", "Unregistering device...");
 
-        self.set("isLoading",true);
+        self.set("isLoading", true);
         self.disableButton = true;
 
         self.everlive.push.unregister(self._unregisterDeviceSuccess, self._unregisterDeviceError);

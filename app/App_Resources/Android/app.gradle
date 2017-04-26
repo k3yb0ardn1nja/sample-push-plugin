@@ -1,0 +1,18 @@
+// Add your native dependencies here:
+
+// Uncomment to add recyclerview-v7 dependency
+//dependencies {
+//	compile 'com.android.support:recyclerview-v7:+'
+//}
+
+android {
+  defaultConfig {
+    generatedDensities = []
+    applicationId "com.telerik.PushNotificationApp"
+    minSdkVersion 17
+    targetSdkVersion 25
+  }
+  aaptOptions {
+    additionalParameters "--no-version-vectors"
+  }
+}
