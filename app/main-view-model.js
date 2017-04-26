@@ -91,7 +91,7 @@ var MainViewModel = (function (_super) {
                 //Show a dialog with the push notification
                 dialogs.alert({
                     title: "Push Notification",
-                    message: JSON.stringify(userInfo.alert),
+                    message: JSON.stringify(userInfo.alert || userInfo.body),
                     okButtonText: "OK"
                 }).then(function () {
                     console.log("Dialog closed!");
