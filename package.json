@@ -1,15 +1,22 @@
 {
-	"nativescript": {
-		"id": "com.telerik.PushNotificationApp",
-		"tns-ios": {
-			"version": "2.2.0"
-		},
-		"tns-android": {
-			"version": "2.2.0"
-		}
-	},
-	"dependencies": {
-		"nativescript-push-notifications": ">=0.0.10",
-		"tns-core-modules": "2.2.0"
-	}
+  "nativescript": {
+    "id": "com.telerik.PushNotificationApp",
+    "tns-ios": {
+      "version": "^3.0.0"
+    },
+    "tns-android": {
+      "version": "^3.0.0"
+    }
+  },
+  "dependencies": {
+    "everlive-sdk": "1.9.4",
+    "nativescript-push-notifications": "^0.1.0",
+    "tns-core-modules": "^3.0.0"
+  },
+  "devDependencies": {
+    "babel-traverse": "6.4.5",
+    "babel-types": "6.4.5",
+    "babylon": "6.4.5",
+    "lazy": "1.0.11"
+  }
 }

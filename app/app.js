@@ -1,7 +1,3 @@
 var application = require("application");
-var platform = require("platform");
-
-application.mainModule = "main-page";
-application.cssFile = "./app.css";
-
-application.start();
+application.setCssFileName("./app.css");
+application.start({ moduleName: "main-page" });
