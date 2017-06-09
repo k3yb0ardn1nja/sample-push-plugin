@@ -10,7 +10,7 @@
   },
   "dependencies": {
     "everlive-sdk": "1.9.4",
-    "nativescript-push-notifications": "^0.1.0",
+    "nativescript-push-notifications": "1.x.x",
     "tns-core-modules": "^3.0.0"
   },
   "devDependencies": {

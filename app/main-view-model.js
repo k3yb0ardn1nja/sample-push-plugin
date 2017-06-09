@@ -101,21 +101,18 @@ var MainViewModel = (function (_super) {
             android: {
                 projectNumber: '<ENTER_YOUR_PROJECT_NUMBER>'
             },
-            notificationCallbackAndroid: function callback(data) {
-                //Show a dialog with the push notification
-                //Remove undeeded quotes
-                var message = JSON.stringify(data);
-                if (message.charAt(0) === '"' && message.charAt(message.length - 1) === '"') {
-                    message = message.substr(1, message.length - 2);
-                }
+            notificationCallbackAndroid: function callback(data, notification) {
+                //Show a dialog with the push data
 
-                dialogs.alert({
-                    title: "Push Notification",
-                    message: message,
-                    okButtonText: "OK"
-                }).then(function () {
-                    console.log("Dialog closed!");
-                });
+                if (data) {
+                    dialogs.alert({
+                        title: "Push Data",
+                        message: JSON.stringify(data),
+                        okButtonText: "OK"
+                    }).then(function () {
+                        console.log("Dialog closed!");
+                    });
+                }
             }
         };
     }
